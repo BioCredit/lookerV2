@@ -137,6 +137,7 @@ view: users {
   }
 
   dimension: gender {
+    label: "genero del usuario"
     type: string
     sql: ${TABLE}.gender ;;
   }
