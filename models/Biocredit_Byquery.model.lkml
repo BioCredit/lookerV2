@@ -13,4 +13,11 @@ datagroup: Biocredit_Byquery_default_datagroup
 }
 persist_with: Biocredit_Byquery_default_datagroup
 
+#-----------------------------Explorer--------------------------------
 explore: users{}
+
+explore:user_credit{}
+
+explore: users_allied_companies{}
+
+explore: credit_status_description{}
