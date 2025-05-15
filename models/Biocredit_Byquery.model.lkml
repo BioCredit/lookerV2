@@ -1,23 +1,44 @@
-# Define the database connection to be used for this model.
+
 connection: "streamdb_bioqa"
 
-# include all the views
 include: "/views/**/*.view.lkml"
 
-# Datagroups define a caching policy for an Explore. To learn more,
-# use the Quick Help panel on the right to see documentation.
 datagroup: Biocredit_Byquery_default_datagroup
 {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
+
   max_cache_age: "1 hour"
 }
 persist_with: Biocredit_Byquery_default_datagroup
 
-#-----------------------------Explorer--------------------------------
-explore: users{}
-
-explore:user_credit{}
-
+#-----------------------------Explorer--------------------------------------
+explore: users
+ {
+    join: user_credit
+    {
+      type: left_outer
+      sql_on: ${user_credit.user_id} = ${users.id};;
+      relationship: many_to_one
+    }
+  }
+explore:user_credit
+{
+    join: users {
+      type: left_outer
+      sql_on: ${user_credit.user_id} = ${users.id};;
+      relationship: many_to_one
+    }
+    join: credit_status_description{
+      type: left_outer
+      sql_on: ${user_credit.credit_status_id} = ${credit_status_description.id};;
+      relationship: many_to_one
+    }
+    join: users_allied_companies{
+      type: left_outer
+      sql_on: ${user_credit.user_id} = ${users_allied_companies.document_id};;
+      relationship: one_to_one
+    }
+}
 explore: users_allied_companies{}
 
 explore: credit_status_description{}
+#---------------------------------------------------------------------------
