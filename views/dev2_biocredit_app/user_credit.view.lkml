@@ -38,6 +38,17 @@ view: user_credit {
     type: number
     sql: ${TABLE}.credit_status_id ;;
   }
+  dimension: credit_status_label
+  {
+    type: string
+    sql:
+    CASE
+      WHEN ${credit_status_id} = 1 THEN 'Pendiente'
+      WHEN ${credit_status_id} = 2 THEN 'Aprobado'
+      WHEN ${credit_status_id} = 3 THEN 'Negado'
+      ELSE 'Null'
+    END ;;
+  }
 
   dimension: credit_type_id {
     type: number
