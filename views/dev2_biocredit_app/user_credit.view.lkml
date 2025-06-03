@@ -165,8 +165,14 @@ view: user_credit {
     type: number
     sql: ${TABLE}.user_id ;;
   }
+  #------------------------------------------------------------medidas---------------------------
   measure: count {
     type: count
     drill_fields: [appname]
   }
+  measure:suma_total_amount{
+    type: sum
+    sql: CAST(${total_amount} AS INT64) ;;
+  }
+
 }

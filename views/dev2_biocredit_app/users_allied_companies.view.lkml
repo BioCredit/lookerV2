@@ -20,9 +20,18 @@ view: users_allied_companies {
     type: string
     sql: ${TABLE}.cellphone ;;
   }
+  #-----------------------implementacion de Json---------------------------------------------------------------
+  dimension: Nombre_universidad {
+    type: string
+    sql: JSON_EXTRACT_SCALAR(${users_allied_companies.additional_information}, "$.college") ;;
+  }
+  dimension: Nombre_del_programa{
+    type: string
+    sql: JSON_EXTRACT_SCALAR(${users_allied_companies.additional_information}, "$.edu_program_name") ;;
+  }
 
   dimension: company_id {
-    type: number
+    type: string
     sql: ${TABLE}.company_id ;;
   }
   # Dates and timestamps can be represented in Looker using a dimension group of type: time.
