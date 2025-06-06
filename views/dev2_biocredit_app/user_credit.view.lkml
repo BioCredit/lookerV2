@@ -165,7 +165,7 @@ view: user_credit {
     type: number
     sql: ${TABLE}.user_id ;;
   }
-  #------------------------------------------------------------medidas---------------------------
+  #------------------------------------------------------------medidas------
   measure: count {
     type: count
     drill_fields: [appname]
