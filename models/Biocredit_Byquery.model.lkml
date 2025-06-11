@@ -34,7 +34,8 @@ explore:user_credit
     }
     join: users_allied_companies{
       type: left_outer
-      sql_on:${user_credit.user_id}  = ${users_allied_companies.document_id} ;;
+      sql_on:${users.document_id}  = ${users_allied_companies.document_id}
+      AND ${users.id}=${user_credit.user_id};;
       relationship: one_to_one
     }
 }
