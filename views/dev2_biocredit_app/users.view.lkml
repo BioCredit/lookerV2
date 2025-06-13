@@ -21,6 +21,11 @@ view: users {
     # A dimension is a groupable field that can be used to filter query results.
     # This dimension will be called "Citizenship" in Explore.
 
+  #--------------------Edad actual---------------------------------
+  dimension: edad {
+    type: number
+    sql: TIMESTAMP_DIFF(CURRENT_DATE(), ${birthdate_raw}, YEAR) ;;
+  }
   dimension: citizenship {
     type: string
     sql: ${TABLE}.citizenship ;;
